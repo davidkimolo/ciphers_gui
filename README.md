@@ -2,8 +2,11 @@
 This project will host cryptographic ciphers in GUI format
 
 ## TO-DO
-- Create a window
-- Create UI elements
-- Create the Caesar encryption cipher
-- Create the Caesar decrption cipher
-- Implement the function in the UI
+- Create a window **(done)**
+- Create UI elements **(done)**
+- Create the Caesar encryption cipher **(done)**
+- Create the Caesar decrption cipher **(done)**
+- Implement the function in the UI **(done)**
+- Change Main window and elements background **(done)**
+- Add other ciphers e.g ROT13
+- Package the program
