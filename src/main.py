@@ -10,9 +10,9 @@ class MainWindow(tkinter.Tk):
         # main window title
         self.title("Cryptographic Ciphers")
         # main window size
-        self.geometry("900x500")
+        self.geometry("1320x400")
         # main window color
-        self.configure(background = "light blue")
+        self.configure(background = "light grey")
 
 root_window = MainWindow()
 
