@@ -1,6 +1,26 @@
 # imports
 import main as mn 
 
+# logical functions
+# move text
+def move_text_to_decrypt_box():
+    empty_message = "Error! The encryption box or shifter key box is empty\n"
+    moving_text = encryption_box.get("1.0", mn.tkinter.END)
+
+    shifter_key_number = shifter_key_box.get("1.0", mn.tkinter.END)
+
+
+    if (len(moving_text) < 2) or len(shifter_key_number) < 2:
+        # checking if the text box is empty
+        decrption_box.insert("1.0", empty_message)
+    else:
+        # encrypting the data and inserting it to the decryption box
+        decrption_box.insert("1.0", mn.MainWindow.encryption(moving_text, moving_text, int(shifter_key_number)))
+        encryption_box.delete("1.0", mn.tkinter.END)
+
+
+
+
 # create a title
 placeholder_label = mn.tkinter.Label(text = "                     ", font = ("times", 20))
 placeholder_label.grid(row =0 , column =0 )
@@ -33,7 +53,8 @@ shifter_key_box = mn.tkinter.Text(height = 2, width = 8, font = ("times", 15))
 shifter_key_box.grid(row = 2, column = 1)
 
 # encryption_button
-encryption_button = mn.tkinter.Button(text = "                    ENCRYPT                     ", font = ("times", 15), pady = 10,)
+encryption_button = mn.tkinter.Button(text = "                    ENCRYPT                     ",
+                                    font = ("times", 15), pady = 10, command = move_text_to_decrypt_box)
 encryption_button.grid(row = 3, column = 0, sticky = mn.tkinter.W)
 
 # decrption_box
