@@ -12,7 +12,7 @@ class MainWindow(tkinter.Tk):
         # main window size
         self.geometry("1320x400")
         # main window color
-        self.configure(background = "light grey")
+        self.configure(background = "light blue")
 
     # encrption function 
     def encryption(self, message, shifter_key):
