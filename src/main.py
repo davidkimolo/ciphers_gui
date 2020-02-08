@@ -24,10 +24,29 @@ class MainWindow(tkinter.Tk):
 
             if (letter.isupper()):
                 encryption_result += chr((ord(letter) + shifter_key - 65)%26 +65)
-            else:
+            elif (letter.islower()):
                 encryption_result += chr((ord(letter) + shifter_key - 97)%26 +97)
+            elif (letter == " "):
+                encryption_result += " "
         
         return encryption_result
+
+    # decryption function 
+    def decryption(self, message, shifter_key):
+        decryption_result = ""
+
+        # go through every character
+        for i in range(len(message)):
+            letter = message[i]
+
+            if (letter.isupper()):
+                decryption_result += chr((ord(letter) - shifter_key - 65)%26 +65)
+            elif (letter.islower()):
+                decryption_result += chr((ord(letter) - shifter_key - 97)%26 +97)
+            elif (letter == " "):
+                decryption_result += " "
+        
+        return decryption_result    
 
 
 root_window = MainWindow()

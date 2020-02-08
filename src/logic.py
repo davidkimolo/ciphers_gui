@@ -20,3 +20,4 @@ def encryption(message, shifter_key):
 
 # move the text
 
+print (chr(32))
