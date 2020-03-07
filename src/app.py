@@ -5,7 +5,8 @@ import tkinter
 # cipher_combo_box 
 cipher_combo_box = mn.ttk.Combobox(values = [
     "caesar cipher",
-    "ROT13"
+    "ROT13",
+    "Vigenere cipher"
 ])
 cipher_combo_box.grid(row = 4, column = 0, padx = 35)
 cipher_combo_box.current(1)
@@ -58,6 +59,8 @@ def move_text_to_decrypt_box():
             # encrypting the data and inserting it to the decryption box
             decrption_box.insert("1.0", mn.MainWindow.encrypt_rot13(moving_text, moving_text, int(shifter_key_number)))
             encryption_box.delete("1.0", mn.tkinter.END) 
+    elif (the_cipher_value == "Vigenere cipher"):
+        empty_message = "Error! The encryption box or shifter key box is empty\n"
 
 # move decrypted text
 def move_text_to_encrypted_box():
@@ -124,7 +127,7 @@ encryption_box = mn.tkinter.Text(height = 12, width = 50, font = ("times", 16))
 encryption_box.grid(row = 2, column = 0, sticky = mn.tkinter.W)
 
 # shifter_key
-shifter_key = mn.tkinter.Label(text = "Shifter Key", font  = ("times", 15), bg = "light blue")
+shifter_key = mn.tkinter.Label(text = "Shifter Key / Keyword", font  = ("times", 15), bg = "light blue")
 shifter_key.grid(row = 1, column = 1)
 
 # shifter_key_box
