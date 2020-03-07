@@ -1,6 +1,16 @@
 # imports
 import main as mn 
 import tkinter
+from string import ascii_letters
+
+
+# vigenere cipher
+
+from string import ascii_letters
+
+
+
+# -----------------------------------------------------------------------------------------------------
 
 # cipher_combo_box 
 cipher_combo_box = mn.ttk.Combobox(values = [
@@ -9,7 +19,7 @@ cipher_combo_box = mn.ttk.Combobox(values = [
     "Vigenere cipher"
 ])
 cipher_combo_box.grid(row = 4, column = 0, padx = 35)
-cipher_combo_box.current(1)
+cipher_combo_box.current(2)
 
 def get_cipher_combo_box_value():
     cipher_value = cipher_combo_box.get()
@@ -59,8 +69,82 @@ def move_text_to_decrypt_box():
             # encrypting the data and inserting it to the decryption box
             decrption_box.insert("1.0", mn.MainWindow.encrypt_rot13(moving_text, moving_text, int(shifter_key_number)))
             encryption_box.delete("1.0", mn.tkinter.END) 
+
     elif (the_cipher_value == "Vigenere cipher"):
+
+        pattern = {}
+        dictionary = pattern.fromkeys(ascii_letters)
+        sorted_dictionary = {}
+
+        # assigning values 
+        counter = 0
+        counter2 = 0
+        for key, value in dictionary.items():
+            if counter <= 25:
+                value = counter
+                counter += 1
+                sorted_dictionary[key] = value
+            else:
+                value = counter2
+                counter2 += 1
+                sorted_dictionary[key] = value
+
+        # print(sorted_dictionary)
+
+        # check the alphabet position
+        def check_alphabet_position(letter):
+            if letter.isalpha():
+                alphabet_postion = sorted_dictionary[letter]
+            else:
+                alphabet_postion = 0
+            return alphabet_postion
+
+        # this rotates the letters
+        def rotate(letter, rotate_value):
+            if letter.isupper():
+                shift_value = 65
+            if letter.islower():
+                shift_value = 97
+            
+            return chr((ord(letter) + rotate_value - shift_value)%26 + shift_value)
+
+        # encryption function
+        def vigenere_encryption(message, key):
+            encrypted_message = []
+            starting_index = 0
+            for letter in message:
+                # checking if the letter is alpha
+                rotation = check_alphabet_position(key[starting_index])
+                # check if letter is not alpha
+                if letter not in sorted_dictionary:
+                    encrypted_message.append(letter)
+                elif letter.isalpha():
+                    encrypted_message.append(rotate(letter, rotation))
+                
+                # checking if keyword has reached the end
+                if starting_index == (len(key) -1):
+                    starting_index = 0
+                else:
+                    starting_index += 1
+            
+            return "".join(encrypted_message)
+
         empty_message = "Error! The encryption box or shifter key box is empty\n"
+        moving_text = encryption_box.get("1.0", mn.tkinter.END)
+        shifter_key_number = shifter_key_box.get("1.0", mn.tkinter.END[:3])
+        # check if there is a empty error message
+        if empty_message in moving_text:
+            encryption_box.delete("1.0", mn.tkinter.END)
+        
+        elif (len(moving_text) < 2) or len(shifter_key_number) < 2:
+            # checking if the text box is empty
+            decrption_box.insert("1.0", empty_message)
+
+        else:
+            # encrypting the data and inserting it to the decryption box
+            decrption_box.insert("1.0", vigenere_encryption(moving_text, str(shifter_key_number)))
+            encryption_box.delete("1.0", mn.tkinter.END) 
+# -----------------------------------------------------------------------------------------------------------
 
 # move decrypted text
 def move_text_to_encrypted_box():
@@ -99,6 +183,8 @@ def move_text_to_encrypted_box():
         else:
             encryption_box.insert("1.0", mn.MainWindow.decrypt_rot13(moving_text, moving_text, int(shifter_key_number)))
             decrption_box.delete("1.0", mn.tkinter.END)
+    
+
 
 
 
